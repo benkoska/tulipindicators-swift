@@ -158,8 +158,8 @@ public func apo(_ inputs: [Double]) -> (Int, [Double]) {
     return Tulip.shared.call_indicator(name: "apo", inputs: inputs, options: [])
 }
 
-/// Struct holding `arroon` result
-public struct ArroonResult {
+/// Struct holding `aroon` result
+public struct AroonResult {
 
     /// The down values
     public let down: [Double]
@@ -170,12 +170,12 @@ public struct ArroonResult {
 /// Aroon
 /// - Parameter inputs: An array of `Quotable` elements
 /// - Parameter n: The period
-public func arroon<T: Quotable>(_ inputs: [T], period n: Int) -> (Int, ArroonResult) {
+public func aroon<T: Quotable>(_ inputs: [T], period n: Int) -> (Int, AroonResult) {
 
-    let (beginIdx, outputs) = Tulip.shared.call_indicator(name: "arroon", inputs: HL(inputs), options: [Double(n)])
+    let (beginIdx, outputs) = Tulip.shared.call_indicator(name: "aroon", inputs: HL(inputs), options: [Double(n)])
     let count = inputs.count - beginIdx
     let splits = stride(from: 0, to: 2*count, by: count).map { Array(outputs[$0..<$0+count])}
-    return (beginIdx, ArroonResult(down: splits[0], up: splits[1]))
+    return (beginIdx, AroonResult(down: splits[0], up: splits[1]))
 }
 
 /// Aroon Oscillator
